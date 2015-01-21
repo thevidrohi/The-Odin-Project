@@ -3,6 +3,6 @@ class User
 	attr_accessor :name, :token
 	def initialize(name)
 		@name = name
-		@token = @@tokens.shuffle.pop!
+		@token = @@tokens.shuffle!.pop
 	end
 end
