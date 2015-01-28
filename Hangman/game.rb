@@ -6,6 +6,8 @@ puts "Load last game? Y/N"
 
 answer = gets.chomp.downcase
 
+#could use some refactoring, but it works
+
 if answer == "y"
 	game = YAML::load(File.read("savedGame.yaml"))
 	puts "Welcome back."
