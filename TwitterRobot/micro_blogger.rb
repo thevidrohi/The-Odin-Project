@@ -1,4 +1,5 @@
 require 'jumpstart_auth'
+require 'bitly'
 
 class MicroBlogger
 	attr_reader :client
@@ -6,6 +7,8 @@ class MicroBlogger
 	def initialize
 		#puts "Initializing MicroBlogger"
 		@client = JumpstartAuth.twitter
+		Bitly.use_api_version_3
+		@bitly = Bitly.new('hungryacademy','R_430e9f62250186d2612cca76eee2dbc6')
 	end
 
 	def tweet(message)
@@ -48,6 +51,10 @@ class MicroBlogger
 					self.spam_my_followers(parts[1..-1].join(" "))
 				when "elt"
 					self.everyones_last_tweet
+				when "s"
+					self.shorten(parts[1])
+				when "turl"
+					self.tweet(parts[1..-2].join(" ")+" "+self.shorten(parts[-1]))
 				else
 					puts "Command #{t} does not compute."
 			end
@@ -68,14 +75,19 @@ class MicroBlogger
 	end
 
 	def everyones_last_tweet
+		#friends returns a Cursor object, not an array of Friends objects
 		followees = @client.friends
-		puts followees
 		followees.each do |followee|
-			sn = followee.screen_name
+			sn = @client.user(followee).screen_name
 			puts "@#{sn}"
-			puts "#{followee.status.text}"
+			puts "#{@client.user(followee).status.text}"
 			puts ""
 		end
+	end
+
+	def shorten(originalURL)
+		puts "Shortening this URL: #{originalURL}"
+		shortURL = @bitly.shorten(originalURL).short_url
 	end
 end
 
