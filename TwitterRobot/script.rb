@@ -1,5 +1,8 @@
 require './auto_follower.rb'
 
 robot = AutoFollower.new
-robot.followTime("tennis", 40)
+puts "favoriting"
+robot.favoriteTime("tennis", 40)
+puts "unfavoriting"
 robot.unfollowLast(40)
+puts "done"

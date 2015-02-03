@@ -2,7 +2,7 @@ require './micro_blogger'
 #https://dev.twitter.com/rest/public/search
 
 class AutoFollower < MicroBlogger
-	def followTime(query, maxDaily)
+	def favoriteTime(query, maxDaily)
 		query = url_encode(query)
 		searchResults = @client.search(query, result_type: "mixed", count: 40) 
 		searchResults.take(maxDaily).each do |tweet|
