@@ -1,12 +1,18 @@
-require 'jumpstart_auth'
+#require 'jumpstart_auth'
 require 'bitly'
+require 'twitter'
 
 class MicroBlogger
 	attr_reader :client
 
 	def initialize
 		#puts "Initializing MicroBlogger"
-		@client = JumpstartAuth.twitter
+		@client = Twitter::REST::Client.new do |config|
+		  config.consumer_key = "0BVjQKytods3GSBbQ3t6x9nOW"
+		  config.consumer_secret = "EYhr7sTxO084l9OA7vksBFdetDYWBZrK2s90dbDZU4WrNdtUN2"
+		  config.access_token = "3004161963-45opC317UdSjPG76A9yQDONy7nGkf42IlguAMbw"
+		  config.access_token_secret = "lHCaJPtFHRnxn5yx6M1OMJLE9y0LgOr4onSmw1GTisVTt"
+		end
 		Bitly.use_api_version_3
 		@bitly = Bitly.new('hungryacademy','R_430e9f62250186d2612cca76eee2dbc6')
 	end
@@ -91,7 +97,7 @@ class MicroBlogger
 	end
 end
 
-blogger = MicroBlogger.new
-blogger.run
+#blogger = MicroBlogger.new
+#blogger.run
 #blogger.tweet("MicroBlogger Initialized!")
 #blogger.tweet("".ljust(150, "abcd"))
