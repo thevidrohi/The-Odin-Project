@@ -1,0 +1,11 @@
+<html>
+      <body>
+        <h1>Thanks for Posting!</h1>
+        <h2>Here's what we got from you:</h2>
+        <ul>
+          <% params["viking"].each do |k, v| %>
+          	<li><%= "#{k.to_s.upcase}: #{v.to_s}" %></li>
+          <% end %>
+        </ul>
+      </body>
+</html>
