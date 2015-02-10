@@ -3,7 +3,7 @@ class Node
 
 	attr_accessor :value, :parent, :lchild, :rchild
 	def initialize(value, parent=nil, lchild=nil, rchild=nil)
-		@value = value
+		@value = value.to_i
 		@parent = parent
 		@lchild = lchild
 		@rchild = rchild
@@ -23,14 +23,24 @@ class Node
 	end
 
 	def hasRightChild?
-		@rchild.exist?
+		@rchild != nil
 	end
 
 	def hasLeftChild?
-		@lchild.exist?
+		@lchild != nil
 	end
 
 	def to_s
-		puts @value
+		puts "Value: #{@value}"
+		if hasLeftChild?
+			puts "Left Child: #{lchild.value}"
+		else
+			puts "No Left Child"
+		end
+		if hasRightChild?
+			puts "Right Child: #{rchild.value}"
+		else
+			puts "No Right Child"
+		end
 	end
 end
