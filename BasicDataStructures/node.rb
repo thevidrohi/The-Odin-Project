@@ -43,4 +43,16 @@ class Node
 			puts "No Right Child"
 		end
 	end
+
+	def print_tree()
+		#kind of mangled, but gets the job done
+		out = "-----" + @value.to_s + "-----"
+		if hasLeftChild?
+			out = out + "\nL of #{lchild.parent.value.to_s}" + @lchild.print_tree
+		end
+		if hasRightChild?
+			out = out + "\nR of #{rchild.parent.value.to_s}-----" + @rchild.print_tree
+		end
+		out
+	end
 end
